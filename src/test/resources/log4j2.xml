@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="Error" >
+    <Properties>
+        <Property name="basePath">./logs</Property>
+<!--        这里定义了一个变量Basepath ， 然后值是./logs 就是我们当前项目的logs文件夹-->
+    </Properties>
+
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+<!--            这里的target指的什么呢-->
+<!--            <JsonTemplateLayout/>-->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger - %m%n"/>
+<!--            date, time , levels, logger , message and line separater-->
+        </Console>
+
+        <RollingFile name="FILE" fileName="${basePath}/automation.log" filePattern="${basePath}/automation-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger - %m %ex%n"/>
+            <SizeBasedTriggeringPolicy size="50000"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+<!--        <Logger name="com.mycompany" level="INFO"/>-->
+        <Root level="debug">
+            <AppenderRef ref="FILE"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
